@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,11 +12,21 @@ namespace Common.Standard.EntityFramework.Repositories
 
     }
 
-    public interface IRepository<T> : IRepository
-        where T : class, IEntity
+    public interface IRepository<TEntity> : IRepository
+        where TEntity : class, IEntity
     {
-        Task<T> FirstAsync();
+        Task<TEntity> FirstAsync();
 
-        void Add(T entity);
+        void Add(TEntity entity);
+
+        TEntity First(Expression<Func<TEntity, bool>> predicate);
+        Task<TEntity> FirstAsync(Expression<Func<TEntity, bool>> predicate);
+
+        IQueryable<TEntity> OrderByDescending<TKey>(Expression<Func<TEntity, TKey>> keySelector);
+
+        IQueryable<TEntity> OrderBy<TKey>(Expression<Func<TEntity, TKey>> keySelector);
+
+        IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate);
+        Task<IQueryable<TEntity>> WhereAsync(Expression<Func<TEntity, bool>> predicate);
     }
 }
