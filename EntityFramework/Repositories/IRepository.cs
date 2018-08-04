@@ -27,6 +27,5 @@ namespace Common.Standard.EntityFramework.Repositories
         IQueryable<TEntity> OrderBy<TKey>(Expression<Func<TEntity, TKey>> keySelector);
 
         IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate);
-        Task<IQueryable<TEntity>> WhereAsync(Expression<Func<TEntity, bool>> predicate);
     }
 }

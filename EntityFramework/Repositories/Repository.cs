@@ -52,10 +52,5 @@ namespace Common.Standard.EntityFramework.Repositories
         {
             return dbSet.Where(predicate);
         }
-
-        public Task<IQueryable<TEntity>> WhereAsync(Expression<Func<TEntity, bool>> predicate)
-        {
-            return dbSet.WhereAsync(predicate);
-        }
     }
 }
