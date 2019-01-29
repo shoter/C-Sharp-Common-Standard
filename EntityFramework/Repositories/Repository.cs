@@ -38,6 +38,11 @@ namespace Common.Standard.EntityFramework.Repositories
             return dbSet.FirstAsync(predicate);
         }
 
+        public Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            return dbSet.FirstOrDefaultAsync(predicate);
+        }
+
         public IQueryable<TEntity> OrderBy<TKey>(Expression<Func<TEntity, TKey>> keySelector)
         {
             return dbSet.OrderBy(keySelector);
@@ -51,6 +56,16 @@ namespace Common.Standard.EntityFramework.Repositories
         public IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate)
         {
             return dbSet.Where(predicate);
+        }
+
+        public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            return await dbSet.AnyAsync(predicate);
+        }
+
+        public async Task<List<TEntity>> ToListAsync()
+        {
+            return await dbSet.ToListAsync();
         }
     }
 }
